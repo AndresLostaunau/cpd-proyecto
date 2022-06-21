@@ -15,6 +15,8 @@ El desarrollo de la solución del problema debe contener lo siguiente:
 * Medir la velocidad del algoritmo, y representarla en gráficas. Analizar la escalabilidad del software.
 * Optimizacíon: Desarrollar un software de análisis de performance que se adapte al código utilizado y permita obtener métricas que faciliten el análisis de escalabilidad.
 
-Bibliografía
-[1] http://www.iro.umontreal.ca/ lecuyer/myftp/streams00/
+Bibliografía:
+
+[1] http://www.iro.umontreal.ca/lecuyer/myftp/streams00/
+
 [2] https://arxiv.org/pdf/1403.7645.pdf
