@@ -7,3 +7,8 @@ pile:
 	g++ -o pile.exe pile.cpp
 	./pile.exe
 	rm -f pile.exe
+
+bb:
+	g++ -o bb.exe bb.cpp
+	./bb.exe
+	rm -f bb.exe
