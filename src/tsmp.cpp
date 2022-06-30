@@ -39,3 +39,13 @@ struct pile_elem{
         reduced_value = rv;
     }
 };
+
+struct path{
+    bool visited = false;
+    double route[N];
+
+    path(int index){
+        for(int i = 0; i < N; i++)
+            route[i] = route_graph[index][i];
+    }
+};
