@@ -30,12 +30,48 @@ double route_graph[N][N] = {
 struct pile_elem{
     double reduced_value;
     double graph[N][N];
+    int unvisited[N];
+    int full_route[N];
+    int city = 0;
 
     pile_elem(){
         reduced_value = 0;
     }
 
+    pile_elem(double g[N][N]){
+        reduced_value = 0;
+        for(int i = 0; i < N; i++) for(int j = 0; j < N; j++) graph[i][j] = g[i][j];
+    }
+
+    pile_elem(double g[N][N], int vi[N], int start){
+        reduced_value = 0;
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) graph[i][j] = g[i][j];
+            unvisited[i] = vi[i];
+        }
+        city = start;
+    }
+
+    pile_elem(pile_elem &parent, int route){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(i == parent.city || j == route || (i == route && j == city)) graph[i][j] = inf;
+                else graph[i][j] = parent.graph[i][j];
+            }
+            if(i == route) unvisited[i] = -1;
+            else unvisited[i] = parent.unvisited[i];
+        }
+        reduced_value = parent.reduced_value;
+        city = route;
+    }
+
     pile_elem(double rv){
         reduced_value = rv;
+    }
+
+    bool is_empty(){
+        bool ans = true;
+        for(int i = 0; i < N; i++) ans &= (unvisited[i] == -1);
+        return ans;
     }
 };

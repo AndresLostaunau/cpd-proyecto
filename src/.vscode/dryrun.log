@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/freewer/cpd-proyecto/src'
+g++ -o dfs.exe dfs.cpp
+./dfs.exe
+rm -f dfs.exe
+make: Leaving directory '/home/freewer/cpd-proyecto/src'
+ 
