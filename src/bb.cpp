@@ -3,9 +3,11 @@
 
 double min_graph[N][N];
 double max_value = inf;
+pile_elem min_route;
 std::vector<pile_elem> ordered_pile;
 
 void ordered_insert(pile_elem ins){
+    // std::cout<<ins.reduced_value<<'\n';
     for(auto it = ordered_pile.begin(); it != ordered_pile.end(); it++){
         if(ins.reduced_value > it->reduced_value){
             ordered_pile.insert(it, ins);
@@ -58,48 +60,39 @@ void print_graph(double graph[N][N]){
 void branch_entry(pile_elem node){
     pile_elem working;
     for(int i = 0; i < N; i++){
-        if(node.unvisited[i] == -1) continue;
+        if(node.visited[i]) continue;
         working = pile_elem(node, i);
         reduce_graph(working);
-        // print_graph(working.graph);
-        // // std::cout<<working.reduced_value<<'\n';
-        // // return;
-        if(working.reduced_value >= max_value) return;
-        if(working.is_empty()){
+        if(working.reduced_value >= max_value) continue;
+        if(working.is_complete()){
             max_value = working.reduced_value;
+            min_route = working;
         }else{
             ordered_insert(working);
-            return;
         }
     }
 }
 
 void start(int starting_point){
-    int cities[N];
-    for(int i = 0; i < N; i++) {
-        if(i != starting_point) cities[i] = i;
-        else cities[i] = -1;
-    }
-    pile_elem first(route_graph, cities, starting_point), work_elem;
+    pile_elem first(route_graph, starting_point), work_elem;
     reduce_graph(first);
     ordered_pile.push_back(first);
-    while(!ordered_pile.empty()){
+    int count = 0;
+    while(!ordered_pile.empty() && count < 1000000){
         work_elem = ordered_pile.back();
         ordered_pile.pop_back();
         branch_entry(work_elem);
+        count++;
     }
+    std::cout<<count<<'\n';
 }
 
 int main(int argc, char **argv){
     start(0);
-    std::cout<<max_value<<'\n';
-    // ordered_insert(pile_elem(10));
-    // ordered_insert(pile_elem(50));
-    // ordered_insert(pile_elem(30));
-    // ordered_insert(pile_elem(45));
-    // ordered_insert(pile_elem(80));
-    // ordered_insert(pile_elem(20));
-    // for(auto it:ordered_pile){
-    //     std::cout<<it.reduced_value<<'\n';
-    // }
+    std::cout<<min_route.reduced_value<<'\n';
+    double sum = 0;
+    for(int i = 0; i < N-1; i++){
+        std::cout<<min_route.full_route[i]<<"->"<<min_route.full_route[i+1]<<": "<<route_graph[min_route.full_route[i]][min_route.full_route[i+1]]<<'\n';
+    }
+    std::cout<<min_route.full_route[N-1]<<"->"<<min_route.full_route[0]<<": "<<route_graph[min_route.full_route[N-1]][min_route.full_route[0]]<<'\n';
 }

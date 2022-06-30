@@ -3,10 +3,9 @@
 using namespace std;
 
 class graph{
-    private:
+    public:
         vector<path> cities;
         vector<int> order;
-    public:
         graph();
         void DFS(int index);
         int closest_city(path city);
@@ -53,9 +52,15 @@ void graph::print_route(){
 }
 
 int main(){
-    //graph g;
-    //g.DFS(0);
-    //g.print_route();
-
+    graph g;
+    g.DFS(0);
+    g.print_route();
+    double sum = 0;
+    std::cout<<'\n';
+    for(int i = 0; i < N; i++){
+        std::cout<<g.order[i]<<"->"<<g.order[i+1]<<": "<<route_graph[g.order[i]][g.order[i+1]]<<'\n';
+        sum+=route_graph[g.order[i]][g.order[i+1]];
+    }
+    std::cout<<'\n'<<sum<<'\n';
     return 0;
 }

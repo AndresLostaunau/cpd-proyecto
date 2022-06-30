@@ -30,7 +30,7 @@ double route_graph[N][N] = {
 struct pile_elem{
     double reduced_value;
     double graph[N][N];
-    int unvisited[N];
+    bool visited[N];
     int full_route[N];
     int city = 0;
 
@@ -43,36 +43,52 @@ struct pile_elem{
         for(int i = 0; i < N; i++) for(int j = 0; j < N; j++) graph[i][j] = g[i][j];
     }
 
-    pile_elem(double g[N][N], int vi[N], int start){
+    pile_elem(double g[N][N], int start){
         reduced_value = 0;
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < N; j++) graph[i][j] = g[i][j];
-            unvisited[i] = vi[i];
+            visited[i] = false;
+            full_route[i] = -1;
         }
         city = start;
+        visited[start] = true;
+        full_route[0] = start;
     }
 
     pile_elem(pile_elem &parent, int route){
+        int size = -1;
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
                 if(i == parent.city || j == route || (i == route && j == city)) graph[i][j] = inf;
                 else graph[i][j] = parent.graph[i][j];
             }
-            if(i == route) unvisited[i] = -1;
-            else unvisited[i] = parent.unvisited[i];
+            if(i == route) visited[i] = true;
+            else visited[i] = parent.visited[i];
+            if(size == -1 && parent.full_route[i] == -1) size = i;
+            full_route[i] = parent.full_route[i];
         }
-        reduced_value = parent.reduced_value;
+        reduced_value = parent.graph[parent.city][route] + parent.reduced_value;
         city = route;
+        full_route[size] = route;
     }
 
     pile_elem(double rv){
         reduced_value = rv;
     }
 
-    bool is_empty(){
+    bool is_complete(){
         bool ans = true;
-        for(int i = 0; i < N; i++) ans &= (unvisited[i] == -1);
+        for(int i = 0; i < N; i++) ans &= visited[i];
         return ans;
+    }
+
+    void print_route(){
+        std::cout<<full_route[0];
+        for(int i = 1; i < N; i++){
+            if(full_route[i] == -1) break;
+            std::cout<<"->"<<full_route[i];
+        }
+        std::cout<<'\n';
     }
 };
 
