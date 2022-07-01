@@ -3,10 +3,10 @@ dfs:
 	./dfs.exe
 	rm -f dfs.exe
 
-pile:
-	g++ -o pile.exe pile.cpp
-	./pile.exe
-	rm -f pile.exe
+bbomp:
+	g++ -o bbomp.exe -fopenmp bbomp.cpp
+	./bbomp.exe
+	rm -f bbomp.exe
 
 bb:
 	g++ -o bb.exe bb.cpp

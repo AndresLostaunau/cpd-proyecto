@@ -102,3 +102,14 @@ struct path{
             route[i] = route_graph[index][i];
     }
 };
+
+void print_graph(double graph[N][N]){
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            if(graph[i][j] == inf) std::cout<<"  inf ";
+            else std::cout<<std::setw(5)<<graph[i][j]<<' ';
+        }
+        std::cout<<'\n';
+    }
+    std::cout<<'\n';
+}

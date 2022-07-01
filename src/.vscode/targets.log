@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun 30 09:34:12 2022
+# Make data base, printed on Fri Jul  1 10:31:19 2022
 
 # Variables
 
@@ -53,7 +55,7 @@ PATH = /home/freewer/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-9faa459d-6ca6-41f0-a26e-359b2cfef3d9.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-11011b55-98a7-49a1-b266-132264328cd5.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -77,7 +79,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = freewer
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -155,9 +157,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2064, inode 74185): 13 files, no impossibilities.
+# . (device 2064, inode 74185): 15 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -184,18 +186,9 @@ dfs:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 12:44:33.5
+#  Last modified 2022-07-01 10:31:15.3405997
 #  File has been updated.
 #  Successfully updated.
-
-pile:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 7):
-	g++ -o pile.exe pile.cpp
-	./pile.exe
-	rm -f pile.exe
 
 bb:
 #  Implicit rule search has not been done.
@@ -212,6 +205,15 @@ bb:
 #  Modification time never checked.
 #  File has not been updated.
 
+bbomp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 7):
+	g++ -o bbomp.exe -fopenmp bbomp.cpp
+	./bbomp.exe
+	rm -f bbomp.exe
+
 # files hash-table stats:
 # Load=7/1024=1%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
@@ -220,14 +222,12 @@ bb:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 21 / storage = 208 B / avg = 9 B
-# current buf: size = 8162 B / used = 208 B / count = 21 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 23 / storage = 225 B / avg = 9 B
+# current buf: size = 8162 B / used = 225 B / count = 23 / avg = 9 B
 
-# strcache performance: lookups = 28 / hit rate = 25%
+# strcache performance: lookups = 30 / hit rate = 23%
 # hash-table stats:
-# Load=21/8192=0%, Rehash=0, Collisions=1/28=4%
-# Finished Make data base on Thu Jun 30 09:34:12 2022
+# Load=23/8192=0%, Rehash=0, Collisions=1/30=3%
+# Finished Make data base on Fri Jul  1 10:31:19 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-

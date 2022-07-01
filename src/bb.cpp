@@ -1,6 +1,5 @@
 #include "tsmp.cpp"
 
-double min_graph[N][N];
 double max_value = inf;
 pile_elem min_route;
 std::vector<pile_elem> ordered_pile;
@@ -44,17 +43,6 @@ void reduce_graph(pile_elem &ins){
     }
 }
 
-void print_graph(double graph[N][N]){
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++){
-            if(graph[i][j] == inf) std::cout<<"  inf ";
-            else std::cout<<std::setw(5)<<graph[i][j]<<' ';
-        }
-        std::cout<<'\n';
-    }
-    std::cout<<'\n';
-}
-
 bool branch_entry(pile_elem node){
     pile_elem working;
     for(int i = 0; i < N; i++){
@@ -77,20 +65,15 @@ void start(int starting_point){
     pile_elem first(route_graph, starting_point), work_elem;
     reduce_graph(first);
     ordered_pile.push_back(first);
-    int count = 0;
-    auto start = (double)std::clock()/(double)CLOCKS_PER_SEC;
-    while(!ordered_pile.empty()){
+    // int count = 0;
+    auto start = (double)std::clock();
+    do{
         work_elem = ordered_pile.back();
         ordered_pile.pop_back();
-        // work_elem.print_route();
-        count++;
-        if(branch_entry(work_elem)) {
-            std::cout<<count<<'\n';
-            std::cout<<1e6*((double)std::clock()/(double)CLOCKS_PER_SEC - start)/(double) CLOCKS_PER_SEC<<"ns \n";
-            return;
-        }
-    }
-    std::cout<<count<<'\n';
+        // count++;
+    }while(!branch_entry(work_elem));
+    printf("Tiempo: %.3f ms\n",1e3*((double)std::clock() - start)/(double) CLOCKS_PER_SEC);
+    // std::cout<<count<<'\n';
 }
 
 
@@ -100,13 +83,10 @@ int main(int argc, char **argv){
     //     if(i == j) route_graph[i][j] = inf;
     //     else route_graph[i][j] = ((double)rand()/RAND_MAX);
     // }
-    // print_graph(route_graph);
-    // exit(0);
     start(0);
     std::cout<<min_route.reduced_value<<'\n';
-    double sum = 0;
-    for(int i = 0; i < N-1; i++){
-        std::cout<<min_route.full_route[i]<<"->"<<min_route.full_route[i+1]<<": "<<route_graph[min_route.full_route[i]][min_route.full_route[i+1]]<<'\n';
-    }
-    std::cout<<min_route.full_route[N-1]<<"->"<<min_route.full_route[0]<<": "<<route_graph[min_route.full_route[N-1]][min_route.full_route[0]]<<'\n';
+    // for(int i = 0; i < N-1; i++){
+    //     std::cout<<min_route.full_route[i]<<"->"<<min_route.full_route[i+1]<<": "<<route_graph[min_route.full_route[i]][min_route.full_route[i+1]]<<'\n';
+    // }
+    // std::cout<<min_route.full_route[N-1]<<"->"<<min_route.full_route[0]<<": "<<route_graph[min_route.full_route[N-1]][min_route.full_route[0]]<<'\n';
 }
