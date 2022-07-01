@@ -1,4 +1,5 @@
 #include "tsmp.cpp"
+#include <omp.h>
 
 double min_graph[N][N];
 double max_value = inf;
@@ -93,6 +94,26 @@ void start(int starting_point){
     std::cout<<count<<'\n';
 }
 
+void omp_start(int starting point){
+    pile_elem first(route_graph, starting_point), work_elem;
+    int vi[N-1];
+    for(int i = 0; i < N; i++){
+        if(i < starting_point) vi[i] = i;
+        else vi[i] = i+1;
+    }
+    std::vector<double> ordered_stack;
+    reduce_graph(first);
+    ordered_stack.push_back(first);
+    #pragma parallel for schedule(static) private(ordered_stack)
+    for(int i = 0; i < N-1; i++){
+        while(!ordered_stack.empty()){
+            work_elem = ordered_stack.back();
+            ordered_stack.pop_back();
+            pile_elem work(work_elem, i);
+            
+        }
+    }
+}
 
 int main(int argc, char **argv){
     // srand(2);
